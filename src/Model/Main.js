@@ -4,7 +4,7 @@ const Engineer = require('./Engineer');
 const Intern = require('./Intern');
 const Manager = require('./Manager');
 
-module.exports = class Main {
+class Main {
     constructor() {
         this._teamArray = [];
     } 
@@ -34,25 +34,25 @@ module.exports = class Main {
                     type: 'list',
                     name: 'role',
                     message: 'Enter your role',
-                    choices: ['Engineer', 'Intern', 'Manager']
+                    choices: [Main._ENGINEER, Main._INTERN, Main._MANAGER]
                 },
                 {
                     type: 'input',
                     name: 'github',
                     message: 'Enter your github',
-                    when: ({ role }) => role === 'Engineer'
+                    when: ({ role }) => role === Main._ENGINEER
                 },
                 {
                     type: 'input',
                     name: 'officeNumber',
                     message: 'Enter your Office Number',
-                    when: ({ role }) => role === 'Manager'
+                    when: ({ role }) => role === Main._MANAGER
                 },
                 {
                     type: 'input',
                     name: 'school',
                     message: 'Enter your School Name',
-                    when: ({ role }) => role === 'Intern'
+                    when: ({ role }) => role === Main._INTERN
                 }
                   
             ]);
@@ -63,20 +63,27 @@ module.exports = class Main {
                 role,
                 github,
                 school,
-                roomNumber
+                officeNumber
             } = response;
 
             if (role ==="Engineer") {
-                this._teamArray.push(new Engineer(name, id, email, github));
+                this._teamArray.push(new Engineer(name, email, github));
             }
             if (role ==="Intern") {
-                this._teamArray.push(new Intern(name, id, email, school));
+                this._teamArray.push(new Intern(name, email, school));
             }
             if (role ==="Manager") {
-                this._teamArray.push(new Manager(name, id, email, officeNumber));
+                this._teamArray.push(new Manager(name, email, officeNumber));
             }
         }
       
-            console.log(this._teamArray);
+        
     }
 }
+
+Main._ENGINEER = 'engineer';
+Main._INTERN = 'intern';
+Main._MANAGER = 'manager';
+
+
+module.exports = Main;

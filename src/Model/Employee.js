@@ -1,6 +1,8 @@
+const shortid = require('shortid');
+
 module.exports = class Employee { 
-    constructor(name, id, email) {
-        this._id = id;
+    constructor(name, email) {
+        this._id = shortid.generate();
         this._name = name;
         this._email = email;
     }
