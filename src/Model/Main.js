@@ -1,5 +1,9 @@
 const inquirer = require('inquirer');
 
+const Engineer = require('./Engineer');
+const Intern = require('./Intern');
+const Manager = require('./Manager');
+
 module.exports = class Main {
     constructor() {
         this._teamArray = [];
@@ -14,6 +18,7 @@ module.exports = class Main {
         }])
 
         for (let i = 0; i < teamSize; i++) {
+            console.log('*******************');
             const response = await inquirer.prompt([
                 {
                     type: 'input',
@@ -51,7 +56,25 @@ module.exports = class Main {
                 }
                   
             ]);
-            this._teamArray.push(response);
+            
+            const {
+                name,
+                email,
+                role,
+                github,
+                school,
+                roomNumber
+            } = response;
+
+            if (role ==="Engineer") {
+                this._teamArray.push(new Engineer(name, id, email, github));
+            }
+            if (role ==="Intern") {
+                this._teamArray.push(new Intern(name, id, email, school));
+            }
+            if (role ==="Manager") {
+                this._teamArray.push(new Manager(name, id, email, officeNumber));
+            }
         }
       
             console.log(this._teamArray);
