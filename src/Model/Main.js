@@ -134,7 +134,7 @@ Main._templateStart = `
         .card {
             overflow: hidden;
             word-wrap: break-word;
-            width: 13rem;
+            width: 15rem;
         }
 
         .list-group-item {
